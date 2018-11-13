@@ -1,12 +1,9 @@
 package PowerUp;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
-
 import Entity.Player;
 import Main.Game;
-import Visitor.Visitor;
 import Weapon.WeaponSecondPowerUp;
 
 public class PowerUpWeapon_2 extends PowerUp {
@@ -18,12 +15,8 @@ public class PowerUpWeapon_2 extends PowerUp {
 	}
 
 	@Override
-	public void accept(Visitor v) {
-		v.visitPowerUp(this);
-	}
-
-	@Override
 	public void addPowerUp(Player player) {
+		super.addPowerUp(player);
 		player.setWeapon(new WeaponSecondPowerUp(game));
 		game.addDeadEntity(this);
 	}

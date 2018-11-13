@@ -4,7 +4,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import Entity.Player;
 import Main.Game;
-import Visitor.Visitor;
 
 public class PowerUpShieldInvunerable extends PowerUp {
 	private static PowerUpShieldInvunerable INSTANCE = null;
@@ -24,15 +23,11 @@ public class PowerUpShieldInvunerable extends PowerUp {
 
 	@Override
 	public void addPowerUp(Player player) {
+		super.addPowerUp(player);
 		ThreadInvunerable invunerable = new ThreadInvunerable(player);
 		Thread thread = new Thread(invunerable);
 		thread.start();
 		game.addDeadEntity(this);
 	}
-
-	@Override
-	public void accept(Visitor v) {
-		v.visitPowerUp(this);
-	}
-
+	
 }

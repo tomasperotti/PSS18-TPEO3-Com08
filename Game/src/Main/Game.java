@@ -2,7 +2,6 @@ package Main;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.swing.JLayeredPane;
 import Entity.Enemy;
 import Entity.Entity;
 import Entity.Player;
@@ -15,7 +14,6 @@ public abstract class Game {
 	protected int nivel, enemyCount;
 	protected Player player;
 	protected ArrayList<Entity> entities, deadEntities, toAddEntities;
-	protected JLayeredPane contentPane;
 	protected String nextLevel, currentLevel;
 
 	protected Game(GUI_Game gui, String path) {
@@ -77,7 +75,7 @@ public abstract class Game {
 		toAddEntities = new ArrayList<Entity>();
 		for(Entity ent: aux) {
 			entities.add(ent);
-			gui.getContentPane().add(ent.getGraphics());
+			gui.add(ent.getGraphics());
 			gui.setComponentLayer(ent.getGraphics(), 5);
 		}
 	}
@@ -111,6 +109,9 @@ public abstract class Game {
 
 	public void endGame(boolean gameOver) {
 		gui.stopGame();
+		for(Entity entity: entities) {
+			entity.endSound();
+		}
 		if (gameOver) {			
 			GUI_GameOver gameOverGui = GUI_GameOver.getInstance(player.getScore());
 			gameOverGui.setVisible(true);
@@ -124,7 +125,7 @@ public abstract class Game {
 	public String getNextLevel() {
 		return nextLevel;
 	}
-	
+
 	public void setNextLevel(String level) {
 		this.nextLevel = level;
 	}

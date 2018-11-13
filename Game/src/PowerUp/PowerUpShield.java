@@ -6,7 +6,6 @@ import Entity.Player;
 import Main.Game;
 import Shield.Shield;
 import Shield.ShieldPowerUp;
-import Visitor.Visitor;
 
 public class PowerUpShield extends PowerUp {
 
@@ -17,12 +16,8 @@ public class PowerUpShield extends PowerUp {
 	}
 
 	@Override
-	public void accept(Visitor v) {
-		v.visitPowerUp(this);
-	}
-
-	@Override
 	public void addPowerUp(Player player) {
+		super.addPowerUp(player);
 		Shield s = new ShieldPowerUp(player);
 		player.setShield(s);
 		game.addDeadEntity(this);

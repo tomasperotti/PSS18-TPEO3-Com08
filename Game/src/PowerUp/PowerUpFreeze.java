@@ -4,7 +4,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import Entity.Player;
 import Main.Game;
-import Visitor.Visitor;
 
 public class PowerUpFreeze extends PowerUp {
 	public static PowerUpFreeze INSTANCE = null;
@@ -31,12 +30,8 @@ public class PowerUpFreeze extends PowerUp {
 	}
 
 	@Override
-	public void accept(Visitor v) {
-		v.visitPowerUp(this);
-	}
-
-	@Override
 	public void addPowerUp(Player player) {
+		super.addPowerUp(player);
 		ThreadFreeze threadFreeze = new ThreadFreeze(game);
 		game.addDeadEntity(this);
 		Thread thread = new Thread(threadFreeze);

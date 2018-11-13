@@ -4,7 +4,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import Entity.Player;
 import Main.Game;
-import Visitor.Visitor;
 
 public class PowerUpPotion extends PowerUp {
 
@@ -15,12 +14,8 @@ public class PowerUpPotion extends PowerUp {
 	}
 
 	@Override
-	public void accept(Visitor v) {
-		v.visitPowerUp(this);
-	}
-
-	@Override
 	public void addPowerUp(Player player) {
+		super.addPowerUp(player);
 		player.setPotion();
 		game.addDeadEntity(this);
 	}

@@ -5,7 +5,6 @@ import java.awt.Point;
 import javax.swing.ImageIcon;
 import Behaviour.BossBehaviour;
 import Main.Game;
-import Visitor.Visitor;
 import Weapon.Weapon;
 import Weapon.WeaponBoss;
 import Weapon.WeaponBoss2;
@@ -17,7 +16,7 @@ public class FinalBoss extends Enemy {
 		super(x, y, 0, game);
 		this.rectangle.width = this.rectangle.height = 200;
 		comportamiento = new BossBehaviour(game);
-		life = 500;
+		life = 1500;
 		weapon = new WeaponBoss(game);
 		ImageIcon img = new ImageIcon(this.getClass().getResource("/Resources/Ships/bossShip.png"));
 		this.icon = new ImageIcon(img.getImage().getScaledInstance(rectangle.width, rectangle.height, Image.SCALE_DEFAULT));	
@@ -36,11 +35,4 @@ public class FinalBoss extends Enemy {
 		weapon.shoot(new Point(rectangle.x, rectangle.y + rectangle.height / 2));
 	}
 
-	@Override
-	public void accept(Visitor v) {
-		v.visitEnemy(this);
-	}
-
-	@Override
-	protected void dropPowerUp() {}
 }
