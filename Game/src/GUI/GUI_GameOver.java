@@ -3,12 +3,21 @@ package GUI;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Main.Main;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -64,6 +73,18 @@ public class GUI_GameOver extends JFrame {
 			}
 		});
 		
+		JButton btnReiniciar = new JButton("Reiniciar");
+		btnReiniciar.setForeground(Color.WHITE);
+		btnReiniciar.setBackground(Color.BLACK);
+		btnReiniciar.setFont(new Font("Unispace", Font.PLAIN, 17));
+		btnReiniciar.setBounds(620, 11, 150, 50);
+		contentPane.add(btnReiniciar);
+		btnReiniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				restartGame();
+			}
+		});
+		
 		background = new JLabel();
 		background.setIcon(icon);
 		background.setBounds(0, 0, 1024, 700);
@@ -72,6 +93,17 @@ public class GUI_GameOver extends JFrame {
 	}
 	
 	private void exitFromGame() {
-		this.dispose();
+		System.exit(0);
+	}
+	
+	private void restartGame() {
+		Thread t = new Thread() {
+	        public void run() {
+	        	GUI_HomeScreen frame = GUI_HomeScreen.getInstance();
+	    		frame.setVisible(true);
+	        }
+	    };
+	    t.start();
+
 	}
 }
