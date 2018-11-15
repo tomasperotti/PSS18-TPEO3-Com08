@@ -76,7 +76,12 @@ public class VentanaAcceso extends JFrame {
 		if (esta(u.getNombreUsuario())) {
 			String claveAlmacenada = getUsuario(u.getNombreUsuario()).getClave();
 			if (claveAlmacenada.equals(u.getClave())) {
-				iniciarPantallaJuego();
+				if (u.getNombreUsuario().equals("admin")) {
+					iniciarPantallaJuego(true);
+				} else {
+					iniciarPantallaJuego(false);
+				}
+				
 			} else {
 				JOptionPane.showMessageDialog(contentPane, "Clave incorrecta. Intente nuevamente", "Error",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -88,14 +93,27 @@ public class VentanaAcceso extends JFrame {
 			JOptionPane.showMessageDialog(contentPane,
 					"El usuario " + u.getNombreUsuario() + " fue agregado al sistema", "Nuevo usuario creado",
 					JOptionPane.INFORMATION_MESSAGE);
-			iniciarPantallaJuego();
+			if (u.getNombreUsuario().equals("admin")) {
+				iniciarPantallaJuego(true);
+			} else {
+				iniciarPantallaJuego(false);
+			}
 		}
 	}
 	
-	private void iniciarPantallaJuego() {
+	private void iniciarPantallaJuego(boolean userIsAdmin) {
 		dispose();
-		GUI_HomeScreen frame = GUI_HomeScreen.getInstance();
-		frame.setVisible(true);
+		if (userIsAdmin) {
+			GUI_HomeScreen frame = GUI_HomeScreen.getInstance();
+			// Muestro boton de Ver comentarios
+			frame.agregarBotonVerComentarios();
+			frame.setVisible(true);
+		} else {
+			GUI_HomeScreen frame = GUI_HomeScreen.getInstance();
+			frame.setVisible(true);
+		}
+		
+
 	}
 
 	private boolean esta(String nombreUsuario) {
