@@ -164,28 +164,32 @@ public class GUI_ContactForm extends JLayeredPane {
 	}
 	
 	public void agregarComentario (String nombrePersona, String emailPersona, String mensajePersona) {
+		FileWriter fw = null;
 		  try {
 			  
-			  
-	            FileWriter fileWriter =new FileWriter(archivoComentarios);
-	            BufferedWriter bufferedWriter =new BufferedWriter(fileWriter);
-
-	            bufferedWriter.write(nombrePersona);
-	            bufferedWriter.newLine();
-	            bufferedWriter.write(emailPersona);
-	            bufferedWriter.newLine();
-	            bufferedWriter.write(mensajePersona);
-	            bufferedWriter.newLine();
-	            bufferedWriter.newLine();
-	            bufferedWriter.newLine();
+	            fw=new FileWriter(archivoComentarios,true);
+	            fw.write("Nombre: "+nombrePersona);
+	            fw.write(System.getProperty( "line.separator" ));
+	            fw.write("Email "+emailPersona+"\n");
+	            fw.write(System.getProperty( "line.separator" ));
+	            fw.write("Mensaje: "+mensajePersona+"\n");
+	            fw.write(System.getProperty( "line.separator" ));
+	            fw.write("----------------------Linea separadora tercermundista------------------------\n");
+	            fw.write(System.getProperty( "line.separator" ));
 	            
-	            bufferedWriter.close();
 	        }
 	        catch(IOException ex) {
 	            System.out.println(
 	                "Error escribiendo el archivo"
 	                + archivoComentarios + "'");
 	         
+	        } finally {
+	        	try {
+					fw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        }
 	    }
 	}
